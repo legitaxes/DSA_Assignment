@@ -15,7 +15,6 @@ void displayMenu();
 int main()
 {
 	//==================Read all the files first===============================
-    
 	//reads the fare file and saving the data into an array
 	ifstream ip("Fares.csv");
 	if (!ip.is_open())
@@ -51,7 +50,7 @@ int main()
 	//-----------------------------------------------------------------------
 
 	//read the station interchange data and save the data somewhere [not done: save it somewhere, should be stored as array]
-	ifstream lp("Interchange.csv");
+	ifstream lp("Interchanges.csv");
 	if (!lp.is_open())
 	{
 		cout << "Error: File Open" << "\n";
@@ -62,7 +61,7 @@ int main()
 	{
 		getline(lp, station_code1, ',');
 		getline(lp, station_code2, '\n');
-		cout << "Station Code: " << station_code1 << "\n";
+		cout << "Station Code: " << station_code1 << " " << station_code2 << "\n";
 	}
 	lp.close();
 	//-----------------------------------------------------------------------
@@ -73,14 +72,21 @@ int main()
 	{
 		cout << "Error: File Open" << "\n";
 	}
+	string input;
 	string station_route;
 	string distance;
-	while (getline(xp, station_route, ','))
+	while (getline(xp, input, ','))
 	{
-		getline(xp, station_route, ',');
+
+		if (!getline(xp, input, '\n'))
+		{
+			station_route = input;
+			cout << station_route << "\n";
+		}
 		cout << "Station Code: " << station_code << "\n";
 	}
 	xp.close();
+	//-----------------------------------------------------------------------
 
 	//==================Display menu functions===============================
 	int option = -1;
@@ -167,8 +173,8 @@ void displayMenu()
 	cout << "[3] Add and Save a new station on a given MRT line \n";
 	cout << "[4] Find and display a route and price based on source and destination stations\n";
 	cout << "[5] Add a new line [ADV] \n";
-	cout << "[6] Search for Shortest Route and its Price \n";
-	cout << "[7] Display 3 possible routes with price and distance \n";
+	cout << "[6] Search for Shortest Route and its Price [ADV] \n";
+	cout << "[7] Display 3 possible routes with price and distance [ADV] \n";
 	cout << "[0] Exit \n";
 	cout << "--------------------------------\n";
 	cout << "Enter option : ";
