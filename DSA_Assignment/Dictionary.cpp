@@ -7,9 +7,9 @@
 using namespace std;
 #include "Dictionary.h"
 
-Dictionary::Dictionary() { size = 0; }
+DictionaryCode::DictionaryCode() { size = 0; }
 
-Dictionary::~Dictionary() {}
+DictionaryCode::~DictionaryCode() {}
 
 int charvalue(char c)
 {
@@ -24,7 +24,7 @@ int charvalue(char c)
 		return -1;
 }
 
-int Dictionary::hash(KeyType key)
+int DictionaryCode::hash(KeyType key)
 {
 	int total = 0;
 	int value = 0;

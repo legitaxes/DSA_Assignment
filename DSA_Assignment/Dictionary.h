@@ -8,65 +8,60 @@ typedef string KeyType; //station code is the keytype
 typedef string ItemType; 
 
 
-class Dictionary
+class DictionaryCode
 {
 private:
-	struct Node
+	struct DictionaryStation
 	{
 		KeyType	 key;   // search key
+		string name;
 		ItemType item;	// data item
-		Node     *next;	// pointer pointing to next item with same search key
+		DictionaryStation *next;	// pointer pointing to next item with same search key
 	};
 
-	Node *items[MAX_SIZE];
+	DictionaryStation *items[MAX_SIZE];
 	int  size;			// number of items in the Dictionary
 
 public:
 
 	// constructor
-	Dictionary();
+	DictionaryCode();
 
 	// destructor
-	~Dictionary();
+	~DictionaryCode();
 
 	int hash(KeyType key);
 
-	// add a new item with the specified key to the Dictionary
-	// pre : none
-	// post: new item is added to the Dictionary
-	//       size of Dictionary is increased by 1
-	bool add(KeyType newKey, ItemType newItem);
+	// Displays all the station based on given line
+	// pre : checks the station code and determine the line
+	// post: print out all station name based on the line
+	void DisplayAllStations(KeyType newkey);
 
-	// remove an item with the specified key in the Dictionary
-	// pre : key must exist in the Dictionary
-	// post: item is removed from the Dictionary
-	//       size of Dictionary is decreased by 1
-	void remove(KeyType key);
+	// Displays all the station information (Station Name, Station Code, whether it is an interchange) based on given station name
+	// pre : check station name validity, whether it exists
+	// post: station information is printed out 
+	void DisplayStationInfo(string name);
 
+	// add a new station with the specified station code to the DictionaryStation
+	// pre : checks whether the stationcode exists
+	// post: new item is added to the Dictionary, 
+	// station needs to link to the next station,
+	// size of Dictionary is increased by 1
+	// Station should be updated and written in the file
+	bool AddNewStation(KeyType newKey, ItemType newItem);
 
-	// get an item with the specified key in the Dictionary (retrieve)
-	// pre : key must exist in the dictionary
-	// post: none
-	// return the item with the specified key from the Dictionary
-	ItemType get(KeyType key);
+	// print out the route and price of the route based on the given source and destination
+	// pre : checks whether the station name exists for both source and destination
+	// post: a chain of station should be printed out in the program
+	bool FindRoute(string source, string destination);
 
-	// check if the Dictionary is empty
-	// pre : none
-	// post: none
-	// return true if the Dictionary is empty; otherwise returns false
-	bool isEmpty();
+	// Add a new line to the MRT Map
+	// pre : checks which existing stationcode to add to, user have to create a station code and at least 2 stationname with their distance 
+	// post: a new line is added and linked to another station. This other station will be added as an interchange
+	bool AddNewLine(string stationcode, string stationname, string stationname1);
 
-	// check the size of the Dictionary
-	// pre : none
-	// post: none
-	// return the number of items in the Dictionary
-	int getLength();
-
-	//------------------- Other useful functions -----------------
-
-	// display the items in the Dictionary
-	// void print();
-
-	// void replace(KeyType key, ItemType item);
-	// bool contains(KeyType key);
+	// Displays 3 possbile route with their price and distance based on the given source and destination of the station
+	// pre : checks whether source and destination exists
+	// post: Display all 3 possible routes with their price and distance
+	bool DisplayPossibleRoutes(string source, string destination);
 };
