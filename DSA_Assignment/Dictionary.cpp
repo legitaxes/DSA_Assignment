@@ -56,7 +56,6 @@ int DictionaryCode::hash(KeyType key)
 
 void DictionaryCode::DisplayAllStations(KeyType newkey)
 {
-	
 }
 
 void DictionaryCode::DisplayStationInfo(string name)
