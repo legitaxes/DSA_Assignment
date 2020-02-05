@@ -38,3 +38,32 @@ int DictionaryCode::hash(KeyType key)
 	cout << total;
 	return total;
 }
+
+void DictionaryCode::DisplayAllStations(KeyType newkey)
+{
+	
+}
+
+void DictionaryCode::DisplayStationInfo(string name)
+{
+}
+
+bool DictionaryCode::AddNewStation(KeyType newKey, ItemType newItem)
+{
+	return false;
+}
+
+bool DictionaryCode::FindRoute(string source, string destination)
+{
+	return false;
+}
+
+bool DictionaryCode::AddNewLine(string stationcode, string stationname, string stationname1)
+{
+	return false;
+}
+
+bool DictionaryCode::DisplayPossibleRoutes(string source, string destination)
+{
+	return false;
+}
