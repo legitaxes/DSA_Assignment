@@ -7,7 +7,7 @@
 using namespace std;
 #include "Dictionary.h"
 
-DictionaryCode::DictionaryCode() { size = 0; }
+DictionaryCode::DictionaryCode() { DictionaryStation station; }
 
 DictionaryCode::~DictionaryCode() {}
 
@@ -22,6 +22,21 @@ int charvalue(char c)
 	}
 	else
 		return -1;
+}
+
+int DictionaryStation::hash(KeyType key)
+{
+	int total = 0;
+	int value = 0;
+	for (int i = 0; i < key.length(); i++)
+	{
+		value = charvalue(key[i]);
+		total = (total * 52) + value;
+		//total = value*pow(52, key.length() - (i+1)) + total;
+		total = total % MAX_SIZE;
+	}
+	cout << total;
+	return total;
 }
 
 int DictionaryCode::hash(KeyType key)

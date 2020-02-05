@@ -7,22 +7,31 @@ const int MAX_SIZE = 1325;
 typedef string KeyType; //station code is the keytype
 typedef string ItemType; 
 
-
-class DictionaryCode
+class DictionaryStation //dictionarystation is the 2nd dictionary which stores the stationnumber and a node which stores all information of the station
 {
 private:
-	struct DictionaryStation
+	KeyType key;   // search key = this is station number
+	struct Node
 	{
-		KeyType	 key;   // search key
-		string name;
-		ItemType item;	// data item
-		DictionaryStation *next;	// pointer pointing to next item with same search key
+		int stationnumber;
+		ItemType stationname;
+		ItemType nextdistance;
+		bool interchange;
+		bool visited;
 	};
-
-	DictionaryStation *items[MAX_SIZE];
-	int  size;			// number of items in the Dictionary
-
 public:
+	int hash(KeyType key);
+};
+
+class DictionaryCode //dictionarycode is the 1st dictionary which stores the line code which points to the second dictionary
+{
+private:
+	DictionaryStation dict;
+	ItemType stationcode;
+	DictionaryStation *stationcode[MAX_SIZE];
+
+
+public: //where all the methods are stored
 
 	// constructor
 	DictionaryCode();
