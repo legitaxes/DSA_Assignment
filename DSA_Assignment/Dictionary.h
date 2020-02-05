@@ -28,7 +28,7 @@ class DictionaryCode //dictionarycode is the 1st dictionary which stores the lin
 private:
 	DictionaryStation dict;
 	ItemType stationcode;
-	DictionaryStation *stationcode[MAX_SIZE];
+	//DictionaryCode *stationcode[MAX_SIZE];
 
 
 public: //where all the methods are stored
