@@ -30,8 +30,10 @@ private:
 	DictionaryStation dict;
 	ItemType stationcode;
 	//DictionaryCode *stationcode[MAX_SIZE];
-
-
+	struct Node
+	{
+		ItemType stationcode;
+	};
 public: //where all the methods are stored
 
 	// constructor
