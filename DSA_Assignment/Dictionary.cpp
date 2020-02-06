@@ -67,7 +67,6 @@ bool DictionaryStation::add(KeyType newkey, int stationnumber, ItemType stationn
 
 void DictionaryCode::DisplayAllStations(KeyType newkey)
 {
-	
 }
 
 void DictionaryCode::DisplayStationInfo(string name)

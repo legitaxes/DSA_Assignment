@@ -21,7 +21,7 @@ int main()
 		cout << "Error: File Open" << "\n";
 	string fare;
 	string fare_distance;
-	int fareArray[20][2];
+	float fareArray[20][2];
 	int i = 0;
 	//initialise an array and store the fare and fare_distance
 	while (ip.good())
@@ -34,7 +34,7 @@ int main()
 		fareArray[i][i + 1] = fares;
 		cout << fareArray[i][i] << " " << fareArray[i][i + 1] << "\n";
 		i++;
-		//cout << "The fare distance is " << fare_distance << "KM based on the price " << fare << "cents" << "\n";
+		//cout << "The fare distance is " << distance << "KM based on the price " << fares << "cents" << "\n";
 	}
 	ip.close();
 
