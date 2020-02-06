@@ -21,6 +21,7 @@ private:
 	};
 public:
 	int hash(KeyType key);
+	bool add(KeyType hashedkey, int stationnumber, ItemType stationname, ItemType nextdistance, bool interchange, bool visited);
 };
 
 class DictionaryCode //dictionarycode is the 1st dictionary which stores the line code which points to the second dictionary

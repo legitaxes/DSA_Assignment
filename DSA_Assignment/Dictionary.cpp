@@ -39,6 +39,13 @@ int DictionaryStation::hash(KeyType key)
 	return total;
 }
 
+void DictionaryCode::DisplayAllStation(KeyType newkey)
+{
+
+}
+
+
+
 int DictionaryCode::hash(KeyType key)
 {
 	int total = 0;
@@ -52,6 +59,10 @@ int DictionaryCode::hash(KeyType key)
 	}
 	cout << total;
 	return total;
+}
+
+bool DictionaryStation::add(KeyType newkey, int stationnumber, ItemType stationname, ItemType nextdistance, bool interchange, bool visited) {
+
 }
 
 void DictionaryCode::DisplayAllStations(KeyType newkey)
