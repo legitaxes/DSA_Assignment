@@ -24,6 +24,14 @@ int charvalue(char c)
 		return -1;
 }
 
+DictionaryStation::DictionaryStation()
+{
+}
+
+DictionaryStation::~DictionaryStation()
+{
+}
+
 int DictionaryStation::hash(KeyType key)
 {
 	int total = 0;
@@ -54,8 +62,26 @@ int DictionaryCode::hash(KeyType key)
 	return total;
 }
 
+void DictionaryCode::Addlines(KeyType newkey, ItemType newitem) 
+{
+	int index = hash(newkey);
+	if (items[index] == NULL)
+	{
+		// Create a new Node
+		Node *NewNode = new Node;
+		NewNode->linename = newitem;
+		NewNode->key = newkey;
+		NewNode->next = NULL;
+		items[index] = NewNode;
+	}
+		
+}
+
 void DictionaryCode::DisplayAllStations(KeyType newkey)
 {
+	
+	
+
 }
 
 void DictionaryCode::DisplayStationInfo(string name)

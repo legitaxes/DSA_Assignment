@@ -10,26 +10,44 @@ typedef string ItemType;
 class DictionaryStation //dictionarystation is the 2nd dictionary which stores the stationnumber and a node which stores all information of the station
 {
 private:
-	KeyType key;   // search key = this is station number
+	
 	struct Node
 	{
+		KeyType key;   // search key = this is station number
+		string stationcode; // Station code e.g EW1
 		int stationnumber;
 		ItemType stationname;
-		ItemType nextdistance;
 		bool interchange;
-		bool visited;
 	};
+
+	Node *items[MAX_SIZE];
 public:
+
+	// constructor
+	DictionaryStation();
+
+	// destructor
+	~DictionaryStation();
+
 	int hash(KeyType key);
 };
 
 class DictionaryCode //dictionarycode is the 1st dictionary which stores the line code which points to the second dictionary
 {
 private:
+
+	
+	struct Node
+	{
+		KeyType key; //search key = this is station line
+		ItemType linename; // line name is the station line e.g. EW
+		Node *next;
+	};
+	Node *items[MAX_SIZE];
 	DictionaryStation dict;
 	ItemType stationcode;
 	//DictionaryCode *stationcode[MAX_SIZE];
-
+	int size;
 
 public: //where all the methods are stored
 
@@ -40,6 +58,11 @@ public: //where all the methods are stored
 	~DictionaryCode();
 
 	int hash(KeyType key);
+
+	// Add stations to the given line
+	// Pre: none
+	// Post: Added stations to the given line
+	void Addlines(KeyType newkey);
 
 	// Displays all the station based on given line
 	// pre : checks the station code and determine the line
