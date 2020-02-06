@@ -7,28 +7,7 @@
 using namespace std;
 #include "Dictionary.h"
 
-DictionaryCode::DictionaryCode() 
-{ 
-	for (int i = 0; i < MAX_SIZE; i++)
-	{
-		items[i] = NULL;
-	}
-	DictionaryStation station; 
-}
-
-DictionaryCode::~DictionaryCode() {}
-
-DictionaryStation::DictionaryStation()
-{
-	for (int i = 0; i < MAX_SIZE; i++)
-	{
-		items[i] = NULL;
-	}
-}
-
-DictionaryStation::~DictionaryStation()
-{
-}
+/*================================COMPUTE HASH================================*/
 
 int charvalue(char c)
 {
@@ -49,9 +28,8 @@ int charvalue(char c)
 	{
 
 	}
-		return -1;
+	return -1;
 }
-
 
 int DictionaryStation::hash(KeyType key)
 {
@@ -82,7 +60,17 @@ int DictionaryCode::hash(KeyType key)
 	//cout << total;
 	return total;
 }
+/*================================DICTIONARYCODE PART================================*/
+DictionaryCode::DictionaryCode() 
+{ 
+	for (int i = 0; i < MAX_SIZE; i++)
+	{
+		items[i] = NULL;
+	}
+	DictionaryStation station; 
+}
 
+DictionaryCode::~DictionaryCode() {}
 
 bool DictionaryCode::Addlines(KeyType newkey, ItemType newitem)
 {
@@ -122,6 +110,74 @@ bool DictionaryCode::Addlines(KeyType newkey, ItemType newitem)
 	return true;
 }
 
+void DictionaryCode::DisplayAllLines()
+{
+	for (int i = 0; i < MAX_SIZE; i++)
+	{
+		Node *tempNode = items[i];
+		if (tempNode != NULL)
+		{
+
+			cout << "Index = " << i << endl;
+			cout << "Key: " << tempNode->key << endl;
+			cout << "Item: " << tempNode->linename << endl;
+			cout << "-------------------------" << endl;
+		}
+	}
+}
+
+void DictionaryCode::DisplayStationInfo(string name)
+{
+}
+
+
+bool DictionaryCode::FindRoute(string source, string destination)
+{
+	return false;
+}
+
+bool DictionaryCode::AddNewLine(string stationcode, string stationname, string stationname1)
+{
+	return false;
+}
+
+bool DictionaryCode::DisplayPossibleRoutes(string source, string destination)
+{
+	return false;
+}
+
+
+bool DictionaryCode::Linebool(string line)
+{
+	for (int i = 0; i < size; i++)
+	{
+		if (items[i]->linename == line)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+}
+
+/*================================END OF DICTIONARYCODE PART================================*/
+
+/*================================DICTIONARYSTATION PART================================*/
+
+
+DictionaryStation::DictionaryStation()
+{
+	for (int i = 0; i < MAX_SIZE; i++)
+	{
+		items[i] = NULL;
+	}
+}
+
+DictionaryStation::~DictionaryStation()
+{
+}
 
 bool DictionaryStation::AddNewStation(KeyType hashedkey,  string linecode,ItemType stationName, bool interchange)
 {
@@ -190,56 +246,5 @@ void DictionaryStation::DisplayAllStations(string line)
 	}
 }
 
-
-void DictionaryCode::DisplayAllLines()
-{
-	for (int i = 0; i < MAX_SIZE; i++)
-	{
-		Node *tempNode = items[i];
-		if (tempNode != NULL)
-		{
-
-			cout << "Index = " << i << endl;
-			cout << "Key: " << tempNode->key << endl;
-			cout << "Item: " << tempNode->linename << endl;
-			cout << "-------------------------" << endl;
-		}
-	}
-}
-
-void DictionaryCode::DisplayStationInfo(string name)
-{
-}
-
-
-bool DictionaryCode::FindRoute(string source, string destination)
-{
-	return false;
-}
-
-bool DictionaryCode::AddNewLine(string stationcode, string stationname, string stationname1)
-{
-	return false;
-}
-
-bool DictionaryCode::DisplayPossibleRoutes(string source, string destination)
-{
-	return false;
-}
-
-
-bool DictionaryCode::Linebool(string line)
-{
-	for (int i = 0; i < size; i++)
-	{
-		if (items[i]->linename == line)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-}
+/*================================END OF DICTIONARYSTATION PART================================*/
 
