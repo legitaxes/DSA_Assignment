@@ -3,7 +3,7 @@
 #include<iostream>
 using namespace std;
 
-const int MAX_SIZE = 1325;
+const int MAX_SIZE = 101;
 typedef string KeyType; //station code is the keytype
 typedef string ItemType; 
 
@@ -13,12 +13,14 @@ private:
 	
 	struct Node
 	{
-		KeyType key;   // search key = this is station number
-		string stationcode; // Station code e.g EW1
-		int stationnumber;
+		KeyType key;   // search key = stationcode
+		string linecode; // this is the line code e.g. EW
 		ItemType stationname;
-		bool interchange;
+		bool interchange; // this is station name
+		Node *next;
 	};
+
+	int size;
 
 	Node *items[MAX_SIZE];
 public:
@@ -30,7 +32,19 @@ public:
 	~DictionaryStation();
 
 	int hash(KeyType key);
-	bool add(KeyType hashedkey, int stationnumber, ItemType stationname, ItemType nextdistance, bool interchange, bool visited);
+
+	// add a new station with the specified station code to the DictionaryStation
+	// pre : checks whether the stationcode exists
+	// post: new item is added to the Dictionary, 
+	// station needs to link to the next station,
+	// size of Dictionary is increased by 1
+	// Station should be updated and written in the file
+	bool AddNewStation(KeyType hashedkey, string linecode, ItemType stationName, bool interchange);
+
+	// Displays all the station based on given line
+	// pre : checks the station code and determine the line
+	// post: print out all station name based on the line
+	void DisplayAllStations(string linecode);
 };
 
 class DictionaryCode //dictionarycode is the 1st dictionary which stores the line code which points to the second dictionary
@@ -60,28 +74,20 @@ public: //where all the methods are stored
 
 	int hash(KeyType key);
 
-	// Add stations to the given line
+	// Add lines to the given line
 	// Pre: none
-	// Post: Added stations to the given line
-	void Addlines(KeyType newkey);
+	// Post: Added lines to the list of lines
+	bool Addlines(KeyType newkey, ItemType newitem);
 
-	// Displays all the station based on given line
-	// pre : checks the station code and determine the line
-	// post: print out all station name based on the line
-	void DisplayAllStations(KeyType newkey);
+	// Displays all the lines 
+	// pre : none
+	// post: print out all lines
+	void DisplayAllLines();
 
 	// Displays all the station information (Station Name, Station Code, whether it is an interchange) based on given station name
 	// pre : check station name validity, whether it exists
 	// post: station information is printed out 
 	void DisplayStationInfo(string name);
-
-	// add a new station with the specified station code to the DictionaryStation
-	// pre : checks whether the stationcode exists
-	// post: new item is added to the Dictionary, 
-	// station needs to link to the next station,
-	// size of Dictionary is increased by 1
-	// Station should be updated and written in the file
-	bool AddNewStation(KeyType newKey, ItemType newItem);
 
 	// print out the route and price of the route based on the given source and destination
 	// pre : checks whether the station name exists for both source and destination
@@ -97,4 +103,9 @@ public: //where all the methods are stored
 	// pre : checks whether source and destination exists
 	// post: Display all 3 possible routes with their price and distance
 	bool DisplayPossibleRoutes(string source, string destination);
+
+	// Check if the line is an existing line
+	// Pre: string line for user to key in
+	// Post: return true if line is an existing line, else false
+	bool Linebool(string line);
 };
