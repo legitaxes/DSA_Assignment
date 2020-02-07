@@ -88,7 +88,6 @@ bool DictionaryCode::Addlines(KeyType newkey)
 	{
 		// Create a new Node
 		Node *NewNode = new Node;
-		NewNode->linename = newkey;
 		NewNode->key = newkey;
 		items[index] = NewNode;
 		size++;
@@ -111,8 +110,7 @@ void DictionaryCode::DisplayAllLines()
 		{
 
 			cout << "Index = " << i << endl;
-			cout << "Key: " << tempNode->key << endl;
-			cout << "Item: " << tempNode->linename << endl;
+			cout << "Line: " << tempNode->key << endl;
 			cout << "-------------------------" << endl;
 		}
 	}
@@ -140,7 +138,7 @@ bool DictionaryCode::Linebool(string line)
 {
 	for (int i = 0; i < size; i++)
 	{
-		if (items[i]->linename == line)
+		if (items[i]->key == line)
 		{
 			return true;
 		}
