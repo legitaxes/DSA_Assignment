@@ -59,7 +59,7 @@ int main()
 		getline(lp, station_code1, ',');
 		getline(lp, station_code2, '\n');
 		interchangeArray[i] = station_code1;
-		interchangeArray[i+1] = station_code2;
+		interchangeArray[i + 1] = station_code2;
 		cout << station_code1 << " " << station_code2 << endl;
 		i = i + 2;
 	}
@@ -75,47 +75,30 @@ int main()
 	}
 	string station_code;
 	string station_name;
-	//string stationcodeArray[20]; //use this array to check whether it is a duplicate line
 	int a = 0;
 	unordered_map<string, vector<string>> stationsmap;
 	while (op.good())
 	{
 		getline(op, station_code, ',');
 
-		//string linecode;
+		string linecode;
 		//splits the station code from eg. "EW2" to "EW" and add to stationcodeArray which is used to check the station
-		//for (int i = 0; i < station_code.length(); i++)
-		//{
-		//	if (!isdigit(station_code[i]))
-		//	{
-		//		linecode += station_code[i];
-		//	}
-		//	//after reaching the last character of the stationcode 
-		//	if (i == station_code.length()-1)
-		//	{
-		//		//check through the list of stationcodeArray
-		//		for (int i = 0; i < sizeof(stationcodeArray); i++)
-		//		{
-		//			if (stationcodeArray[i] == linecode)
-		//			{
-		//				break;
-		//			}
-		//			else
-		//			{
-		//				line.Addlines(linecode);
-		//				stationcodeArray[a] = linecode;
-		//				break;
-		//			}
-		//		}
-
-		//	}
-		//}
+		for (int i = 0; i < station_code.length(); i++)
+		{
+			if (!isdigit(station_code[i]))
+			{
+				linecode += station_code[i];
+			}
+			//after reaching the last character of the stationcode 
+				//check through the list of stationcodeArray
+		}
+		line.Addlines(linecode);
 		getline(op, station_name, '\n');
 		auto station_codesearch = stationsmap.find(station_name);
-		if (station_codesearch != stationsmap.end()) 
+
+		if (station_codesearch != stationsmap.end())
 		{
-			vector<string> station_codelist;
-			station_codelist.push_back({ station_code });
+			stationsmap.at(station_name).push_back(station_code);
 		}
 		else
 		{
@@ -123,33 +106,25 @@ int main()
 			station_codeli.push_back(station_code);
 			stationsmap.insert({ station_name, station_codeli });
 		}
-
-		//for (int i = 0; i < interchangeArray.size(); i++)
-		//{
-		//	if (station_code == interchangeArray[i])
-		//	{
-		//		bool interchange = true;
-		//		bool code = line.Linebool(linecode);
-		//		if (code == true)
-		//		{
-		//			stations.AddNewStation(station_code, linecode, station_name, interchange);
-		//			break;
-		//		}
-		//	}
-		//	else
-		//	{
-		//		bool interchange = false;
-		//		bool code = line.Linebool(linecode);
-		//		if (code == true)
-		//		{
-		//			stations.AddNewStation(station_code, linecode, station_name, interchange);
-		//			break;
-		//		}
-		//	}
-		//}
-		//a++; //increment the a value 
 	}
 	op.close();
+	for (auto it : stationsmap)
+	{
+		for (int i = 0; i < it.second.size(); i++)
+		{
+			
+			if (it.second.size() == 1)
+			{
+				stations.AddNewStation(it.second[i], it.first, false);
+			}
+			else
+			{
+				stations.AddNewStation(it.second[i], it.first, true);
+			}
+			
+		}
+	}
+
 	//-----------------------------------------------------------------------
 
 
