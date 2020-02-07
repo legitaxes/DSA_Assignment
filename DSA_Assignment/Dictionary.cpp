@@ -165,9 +165,17 @@ DictionaryStation::~DictionaryStation()
 {
 }
 
-bool DictionaryStation::AddNewStation(KeyType hashedkey,  string linecode,ItemType stationName, bool interchange)
+bool DictionaryStation::AddNewStation(KeyType hashedkey,ItemType stationName, bool interchange)
 {
 	// stationcode = hashed key
+	string linecode;
+	for (int i = 0; i < hashedkey.length(); i++)
+	{
+		if (!isdigit(hashedkey[i]))
+		{
+			linecode += hashedkey[i];
+		}
+	}
 	int index = hash(hashedkey);
 	if (items[index] == NULL)
 	{
@@ -189,22 +197,24 @@ bool DictionaryStation::AddNewStation(KeyType hashedkey,  string linecode,ItemTy
 
 void DictionaryStation::DisplayAllStations(string line)
 {
-	string inter = "False";
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
 		Node *tempNode = items[i];
 		if (tempNode != NULL)
 		{
-			if (tempNode->interchange == true)
-			{
-				inter = "True";
-			}
 			if (tempNode->linecode == line)
 			{
 				cout << "Index = " << i << endl;
 				cout << "Key: " << tempNode->key << endl;
 				cout << "stationname: " << tempNode->stationname << endl;
-				cout << "Interchange? " << inter << endl;
+				if (tempNode->interchange == true)
+				{
+					cout << "Interchange? " << "True" << endl;
+				}
+				else
+				{
+					cout << "Interchange? " << "False" << endl;
+				}
 				cout << "-------------------------" << endl;
 			}
 		}

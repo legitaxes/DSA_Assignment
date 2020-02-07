@@ -41,7 +41,7 @@ public:
 	// station needs to link to the next station,
 	// size of Dictionary is increased by 1
 	// Station should be updated and written in the file
-	bool AddNewStation(KeyType hashedkey, string linecode, ItemType stationName, bool interchange);
+	bool AddNewStation(KeyType hashedkey, ItemType stationName, bool interchange);
 
 	// Displays all the station based on given line
 	// pre : checks the station code and determine the line
