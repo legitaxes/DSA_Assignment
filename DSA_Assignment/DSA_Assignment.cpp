@@ -134,21 +134,28 @@ void displayMenu()
 //		displayMenu();
 //		cin >> option;
 //
-//		if (option == 1)	// display items
+//		if (option == 1)	// display all mrt station based on the given mrt line
 //		{
-//			//bst.inorder();
+			//line.DisplayAllLines();
+			//cout << "Enter a station line to list out all the station name:
+			//cin << line;
+			//stations.DisplayAllStations(line)
 //		}
 //		else
 //		{
-//			if (option == 2)	// search item
+//			if (option == 2)	// display station information based on the station name given
 //			{
-//				//cout << "Enter a number to search : ";
-//				//cin >> target;
-//				//BinaryNode* p = bst.search(target);
-//				//if (p != NULL)
-//				//	cout << "Found" << endl;
-//				//else
-//				//	cout << "Not found" << endl;
+				//line.DisplayAllLines();
+				//cout << "Enter a station line to list out all the station name:
+				//cin << line;
+				//stations.DisplayAllStations(line)
+				//cout << "Enter a station name to display its information:
+				//cin >> target;
+				//stations.DisplayStationInfo(target);
+				//if (p != NULL)
+				//	cout << "Found" << endl;
+				//else
+				//	cout << "Not found" << endl;
 //			}
 //			else
 //				if (option == 3)	// add item
