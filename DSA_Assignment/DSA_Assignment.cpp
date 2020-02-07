@@ -16,6 +16,7 @@ void displayMenu();
 int main()
 {
 	DictionaryCode line;
+	string l;
 	DictionaryStation stations;
 	line.Addlines("EW", "EW");
 	line.Addlines("NS", "NS");
@@ -31,6 +32,7 @@ int main()
 	//stations.AddNewStation("NS1", "NS" ,"CCK", true);
 	stations.DisplayAllStations("CG");
 	stations.DisplayAllStations("EW");
+
 	////==================Read all the files first===============================
 	////reads the fare file and saving the data into an array
 	//ifstream ip("Fares.csv");
@@ -113,87 +115,92 @@ int main()
 	////-----------------------------------------------------------------------
 
 	////==================Display menu functions===============================
-	//int option = -1;
-	//while (option != 0)
-	//{
-	//	displayMenu();
-	//	cin >> option;
+	int option = -1;
+	while (option != 0)
+	{
+		displayMenu();
+		cin >> option;
 
-	//	if (option == 1)	// display all mrt station based on the given mrt line
-	//	{
-	//		line.DisplayAllLines();
-	//		cout << "Enter a station line to list out all the station name: ";
-	//		cin >> l;
-	//		stations.DisplayAllStations(l)
-	//	}
-	//	else
-	//	{
-	//		if (option == 2)	// display station information based on the station name given
-	//		{
-	//			line.DisplayAllLines();
-	//			cout << "Enter a station line to list out all the station name:";
-	//			cin >> line;
-	//			stations.DisplayAllStations(line);
-	//			cout << "Enter a station name to display its information:";
-	//			cin >> target;
-	//			stations.DisplayStationInfo(target);
-	//			if (p != NULL)
-	//				cout << "Found" << endl;
-	//			else
-	//				cout << "Not found" << endl;
-	//		}
-	//		else
-	//			if (option == 3)	// add item
-	//			{
-	//				//int n;
-	//				//cout << "Enter a number to add : ";
-	//				//cin >> n;
-	//				//bst.insert(n);
-	//			}
-	//			else
-	//				if (option == 4)	// delete item
-	//				{
-	//					//int n;
-	//					//cout << "Enter a number to delete : ";
-	//					//cin >> n;
-	//					//bst.remove(n);
-	//				}
-	//				else
-	//					if (option == 5)
-	//					{
-	//						//	int n = bst.countNodes();
-	//						//	cout << "The number of nodes there are is " << n;
-	//					}
-	//		// display number of items
+		if (option == 1)	// display all mrt station based on the given mrt line
+		{
+			line.DisplayAllLines();
+			cout << "Enter a station line to list out all the station name: ";
+			cin >> l;
+			string lineinput;
+			for (int i = 0; i < l.length(); i++)
+			{
+				lineinput += toupper(l[i]);;
+			}
+			stations.DisplayAllStations(lineinput);
+		}
+		else
+		{
+			if (option == 2)	// display station information based on the station name given
+			{
+				line.DisplayAllLines();
+				cout << "Enter a station line to list out all the station name:";
+				cin >> l;
+				string lineinput;
+				for (int i = 0; i < l.length(); i++)
+				{
+					lineinput += toupper(l[i]);;
+				}
+				stations.DisplayAllStations(lineinput);
+				string target;
+				cout << "Enter a station name to display its information:";
+				getline(cin, target);
+				stations.DisplayStationInfo(target);
+			}
+			else
+				if (option == 3)	// add item
+				{
+					//int n;
+					//cout << "Enter a number to add : ";
+					//cin >> n;
+					//bst.insert(n);
+				}
+				else
+					if (option == 4)	// delete item
+					{
+						//int n;
+						//cout << "Enter a number to delete : ";
+						//cin >> n;
+						//bst.remove(n);
+					}
+					else
+						if (option == 5)
+						{
+							//	int n = bst.countNodes();
+							//	cout << "The number of nodes there are is " << n;
+						}
+			// display number of items
 
-	//					else
-	//						if (option == 6)	// display height
-	//						{
-	//							//	int n = bst.getHeight();
-	//							//	cout << "The height of the nodes is " << n;
-	//						}
-	//						else
-	//							if (option == 7)	// check if tree is balanced
-	//							{
-	//								//		bool b = bst.isBalanced();
-	//								//		if (b == true)
-	//								//		{
-	//								//			cout << "The tree is balanced!";
-	//								//		}
-	//								//		else
-	//								//		{
-	//								//			cout << "The tree is not balanced! :(";
-	//								//		}
-	//							}
-	//							else
-	//								if (option == 0)
-	//									cout << "Bye! \n";
-	//								else
-	//									cout << "Sorry. You have entered an invalid option. \n";
-	//	}
-	//}
-
-
+						else
+							if (option == 6)	// display height
+							{
+								//	int n = bst.getHeight();
+								//	cout << "The height of the nodes is " << n;
+							}
+							else
+								if (option == 7)	// check if tree is balanced
+								{
+									//		bool b = bst.isBalanced();
+									//		if (b == true)
+									//		{
+									//			cout << "The tree is balanced!";
+									//		}
+									//		else
+									//		{
+									//			cout << "The tree is not balanced! :(";
+									//		}
+								}
+								else
+									if (option == 0)
+										cout << "Bye! \n";
+									else
+										cout << "Sorry. You have entered an invalid option. \n";
+		}
+	}
 }
 
 void displayMenu()
