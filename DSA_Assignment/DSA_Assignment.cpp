@@ -18,7 +18,7 @@ int main()
 	DictionaryCode line;
 	string l;
 	DictionaryStation stations;
-
+	string target;
 	////==================Read all the files first===============================
 	////reads the fare file and saving the data into an array
 	//ifstream ip("Fares.csv");
@@ -151,18 +151,9 @@ int main()
 		{
 			if (option == 2)	// display station information based on the station name given
 			{
-				line.DisplayAllLines();
-				cout << "\nEnter a station line to list out all the station name:\n";
-				cin >> l;
-				string lineinput;
-				for (int i = 0; i < l.length(); i++)
-				{
-					lineinput += toupper(l[i]);;
-				}
-				stations.DisplayAllStations(lineinput);
-				string target;
 				cout << "Enter a station name to display its information:";
 				getline(cin, target);
+				cout << target;
 				stations.DisplayStationInfo(target);
 			}
 			else

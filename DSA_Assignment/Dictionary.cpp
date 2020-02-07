@@ -195,6 +195,7 @@ bool DictionaryStation::AddNewStation(KeyType hashedkey,ItemType stationName, bo
 
 void DictionaryStation::DisplayAllStations(string line)
 {
+	cout << "\n===============================LISTING ALL THE STATIONS FROM - " << line << "=====================================\n" << endl;
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
 		Node *tempNode = items[i];
@@ -202,18 +203,16 @@ void DictionaryStation::DisplayAllStations(string line)
 		{
 			if (tempNode->linecode == line)
 			{
-				cout << "Index = " << i << endl;
-				cout << "Key: " << tempNode->key << endl;
-				cout << "stationname: " << tempNode->stationname << endl;
+				cout << "============================================================================" << endl;
 				if (tempNode->interchange == true)
 				{
-					cout << "Interchange? " << "True" << endl;
+					cout << "Station Code: " << tempNode->key << " || " << "Station Name: " << tempNode->stationname << " || " << "Interchange: " << "Yes" << endl;
 				}
 				else
 				{
-					cout << "Interchange? " << "False" << endl;
+					cout << "Station Code: " << tempNode->key << " || " << "Station Name: " << tempNode->stationname << " || " << "Interchange: " << "No" << endl;
 				}
-				cout << "-------------------------" << endl;
+				cout << "============================================================================" << endl;
 			}
 		}
 	}
@@ -221,7 +220,24 @@ void DictionaryStation::DisplayAllStations(string line)
 
 void DictionaryStation::DisplayStationInfo(string name)
 {
+	for (int i = 0; i < MAX_SIZE; i++)
+	{
+		Node *tempNode = items[i];
+		if (tempNode != NULL && tempNode->stationname == name)
+		{
+			cout << "============================================================================" << endl;
+			if (tempNode->interchange == true)
+			{
+				cout << "Station Code: " << tempNode->key << " || " << "Station Name: " << tempNode->stationname << " || " << "Interchange: " << "Yes" << endl;
+			}
+			else
+			{
+				cout << "Station Code: " << tempNode->key << " || " << "Station Name: " << tempNode->stationname << " || " << "Interchange: " << "No" << endl;
+			}
+			cout << "============================================================================" << endl;
 
+		}
+	}
 }
 
 /*================================END OF DICTIONARYSTATION PART================================*/
