@@ -199,12 +199,12 @@ void DictionaryStation::DisplayAllStations(string line)
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
 		Node *tempNode = items[i];
-		if (tempNode->interchange == true)
-		{
-			inter = "True";
-		}
 		if (tempNode != NULL)
 		{
+			if (tempNode->interchange == true)
+			{
+				inter = "True";
+			}
 			if (tempNode->linecode == line)
 			{
 				cout << "Index = " << i << endl;
