@@ -31,9 +31,15 @@ int DictionaryStation::hash(KeyType key)
 {
 	int total = 0;
 	int value = 0;
+	int number = 0;
 	for (int i = 0; i < key.length(); i++)
 	{
+		if (isdigit(key[i]) == true)
+		{
+			number += key[i];
+		}
 		value = charvalue(key[i]);
+		value = value + number;
 		total = (total * 52) + value;
 		//total = value*pow(52, key.length() - (i+1)) + total;
 		total = total % MAX_SIZE;
@@ -127,17 +133,19 @@ bool DictionaryCode::FindRoute(string source, string destination)
 	return false;
 }
 
+
 bool DictionaryCode::AddNewLine(string stationcode, string stationname, string stationname1)
 {
 	return false;
 }
 
+//displays all the possible routes that a user can go given the source and destination
 bool DictionaryCode::DisplayPossibleRoutes(string source, string destination)
 {
 	return false;
 }
 
-
+//this function checks whether the line exists 
 bool DictionaryCode::Linebool(string line)
 {
 	for (int i = 0; i < size; i++)
@@ -241,5 +249,6 @@ void DictionaryStation::DisplayStationInfo(string name)
 {
 
 }
+
 /*================================END OF DICTIONARYSTATION PART================================*/
 
