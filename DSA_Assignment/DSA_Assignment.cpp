@@ -57,22 +57,26 @@ int main()
 	//}
 	//ip.close();
 	//-----------------------------------------------------------------------
-	//read the station interchange data and save the data somewhere [not done: save it somewhere, should be stored as array]
-	//ifstream lp("Interchanges.csv");
-	//if (!lp.is_open())
-	//{
-	//	cout << "Error: File Open" << "\n";
-	//}
-	//string station_code1;
-	//string station_code2;
-	//while (lp.good())
-	//{
-	//	getline(lp, station_code1, ',');
-	//	getline(lp, station_code2, '\n');
-	//	cout << "Station Code: " << station_code1 << " " << station_code2 << "\n";
-	//}
-	//lp.close();
 
+	//read the station interchange data and save the data somewhere [not done: save it somewhere, should be stored as array]
+	ifstream lp("Interchanges.csv");
+	if (!lp.is_open())
+	{
+		cout << "Error: File Open" << "\n";
+	}
+	string station_code1;
+	string station_code2;
+	string interchangeArray[35][2];
+	int i = 0;
+	while (lp.good())
+	{
+		getline(lp, station_code1, ',');
+		getline(lp, station_code2, '\n');
+		interchangeArray[i][i] = station_code1;
+		interchangeArray[i][i+1] = station_code2;
+		i++;
+	}
+	lp.close();
 
 	//-----------------------------------------------------------------------
 	//read the station information data and save the data somewhere [not done: save the station somewhere]
@@ -89,6 +93,7 @@ int main()
 	{
 		getline(op, station_code, ',');
 		string linecode;
+		bool interchange = false;
 		//splits the station code from eg. "EW2" to "EW" and add to stationcodeArray which is used to check the station
 		for (int i = 0; i < station_code.length(); i++)
 		{
@@ -117,7 +122,14 @@ int main()
 			}
 		}
 		getline(op, station_name, '\n');
-		stations.AddNewStation(station_code, linecode, station_name, false);
+		for (int i = 0; i < sizeof(interchangeArray); i++)
+		{
+			if (interchangeArray[i][i] == station_code || interchangeArray[i][i + 1] == station_code)
+			{
+				interchange = true;
+			}
+		}
+		stations.AddNewStation(station_code, linecode, station_name, interchange);
 		a++; //increment the a value 
 	}
 	op.close();
