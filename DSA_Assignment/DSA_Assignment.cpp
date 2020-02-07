@@ -8,6 +8,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <array>
 
 using namespace std;
 
@@ -57,27 +58,28 @@ int main()
 	//}
 	//ip.close();
 	//-----------------------------------------------------------------------
-
 	//read the station interchange data and save the data somewhere [not done: save it somewhere, should be stored as array]
 	ifstream lp("Interchanges.csv");
 	if (!lp.is_open())
 	{
 		cout << "Error: File Open" << "\n";
 	}
-	string station_code1;
-	string station_code2;
-	string interchangeArray[35][2];
-	//p = interchangeArray;
+	ItemType station_code1;
+	ItemType station_code2;
+	array<string, 100>interchangeArray;
+	//string(*interchangeArray_ptr)[35][2] = &interchangeArray;
 	int i = 0;
 	while (lp.good())
 	{
 		getline(lp, station_code1, ',');
-		interchangeArray[i][i] = station_code1;
 		getline(lp, station_code2, '\n');
-		interchangeArray[i][i+1] = station_code2;
-		i++;
+		interchangeArray[i] = station_code1;
+		interchangeArray[i+1] = station_code2;
+		cout << station_code1 << " " << station_code2 << endl;
+		i = i + 2;
 	}
 	lp.close();
+
 
 	//-----------------------------------------------------------------------
 	//read the station information data and save the data somewhere [not done: save the station somewhere]
@@ -88,7 +90,7 @@ int main()
 	}
 	string station_code;
 	string station_name;
-	string stationcodeArray[20]; //use this array to check whether it is a duplicate line
+	array<string,20> stationcodeArray; //use this array to check whether it is a duplicate line
 	int a = 0;
 	while (op.good())
 	{
@@ -123,16 +125,12 @@ int main()
 			}
 		}
 		getline(op, station_name, '\n');
-		for (int i = 0; i < sizeof(interchangeArray); i++)
+		for (int i = 0; i < interchangeArray.size(); i++)
 		{
-			if (interchangeArray[i][i+1] == station_code)
+			if (interchangeArray[i] == station_code)
 			{
 				interchange = true;
 			}
-			/*else if(interchangeArray[i][i + 1] == station_code)
-			{
-				interchange = true;
-			}*/
 		}
 		stations.AddNewStation(station_code, linecode, station_name, interchange);
 		a++; //increment the a value 
