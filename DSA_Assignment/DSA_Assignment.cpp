@@ -66,7 +66,7 @@ int main()
 	}
 	ItemType station_code1;
 	ItemType station_code2;
-	array<string, 100>interchangeArray;
+	array<string, 10>interchangeArray;
 	//string(*interchangeArray_ptr)[35][2] = &interchangeArray;
 	int i = 0;
 	while (lp.good())
@@ -90,13 +90,12 @@ int main()
 	}
 	string station_code;
 	string station_name;
-	array<string,20> stationcodeArray; //use this array to check whether it is a duplicate line
+	string stationcodeArray[20]; //use this array to check whether it is a duplicate line
 	int a = 0;
 	while (op.good())
 	{
 		getline(op, station_code, ',');
 		string linecode;
-		bool interchange = false;
 		//splits the station code from eg. "EW2" to "EW" and add to stationcodeArray which is used to check the station
 		for (int i = 0; i < station_code.length(); i++)
 		{
@@ -127,12 +126,27 @@ int main()
 		getline(op, station_name, '\n');
 		for (int i = 0; i < interchangeArray.size(); i++)
 		{
-			if (interchangeArray[i] == station_code)
+			if (station_code == interchangeArray[i])
 			{
-				interchange = true;
+				bool interchange = true;
+				bool code = line.Linebool(linecode);
+				if (code == true)
+				{
+					stations.AddNewStation(station_code, linecode, station_name, interchange);
+					break;
+				}
+			}
+			else
+			{
+				bool interchange = false;
+				bool code = line.Linebool(linecode);
+				if (code == true)
+				{
+					stations.AddNewStation(station_code, linecode, station_name, interchange);
+					break;
+				}
 			}
 		}
-		stations.AddNewStation(station_code, linecode, station_name, interchange);
 		a++; //increment the a value 
 	}
 	op.close();

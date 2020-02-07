@@ -167,30 +167,24 @@ DictionaryStation::~DictionaryStation()
 
 bool DictionaryStation::AddNewStation(KeyType hashedkey,  string linecode,ItemType stationName, bool interchange)
 {
-	DictionaryCode code;
 	// stationcode = hashed key
-	bool line = code.Linebool(hashedkey);
-	if (line == true)
+	int index = hash(hashedkey);
+	if (items[index] == NULL)
 	{
-		int index = hash(hashedkey);
-		if (items[index] == NULL)
-		{
-			// Create a new Node
-			Node *NewNode = new Node;
-			NewNode->key = hashedkey;
-			NewNode->stationname = stationName;
-			NewNode->linecode = linecode;
-			NewNode->interchange = interchange;
-			items[index] = NewNode;
-			size++;
-			return true;
-		}
-		else //checks if the station added is using the same existing station code
-		{
-			return false;
-		}
+		// Create a new Node
+		Node *NewNode = new Node;
+		NewNode->key = hashedkey;
+		NewNode->stationname = stationName;
+		NewNode->linecode = linecode;
+		NewNode->interchange = interchange;
+		items[index] = NewNode;
+		size++;
+		return true;
 	}
-	return false;
+	else //checks if the station added is using the same existing station code
+	{
+		return false;
+	}
 }
 
 void DictionaryStation::DisplayAllStations(string line)
