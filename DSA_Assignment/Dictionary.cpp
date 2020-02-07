@@ -102,13 +102,13 @@ bool DictionaryCode::Addlines(KeyType newkey)
 
 void DictionaryCode::DisplayAllLines()
 {
+	cout << "\n===================Choose a Train Station Line===================" << endl;
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
 		Node *tempNode = items[i];
 		if (tempNode != NULL)
 		{
-			cout << "Line: " << tempNode->key << endl;
-			cout << "-------------------------" << endl;
+			cout << "\n\t\t\t || || " << tempNode->key << " || || \n";
 		}
 	}
 }
@@ -193,7 +193,7 @@ bool DictionaryStation::AddNewStation(KeyType hashedkey,ItemType stationName, bo
 	}
 }
 
-bool DictionaryStation::DisplayAllStations(string line)
+void DictionaryStation::DisplayAllStations(string line)
 {
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
@@ -215,10 +215,8 @@ bool DictionaryStation::DisplayAllStations(string line)
 				}
 				cout << "-------------------------" << endl;
 			}
-			return true;
 		}
 	}
-	return false;
 }
 
 void DictionaryStation::DisplayStationInfo(string name)

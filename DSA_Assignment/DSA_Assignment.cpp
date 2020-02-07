@@ -138,7 +138,7 @@ int main()
 		if (option == 1)	// display all mrt station based on the given mrt line
 		{
 			line.DisplayAllLines();
-			cout << "Enter a station line to list out all the station name: ";
+			cout << "\nEnter a station line to list out all the station name: ";
 			cin >> l;
 			string lineinput;
 			for (int i = 0; i < l.length(); i++)
@@ -152,15 +152,14 @@ int main()
 			if (option == 2)	// display station information based on the station name given
 			{
 				line.DisplayAllLines();
-				cout << "Enter a station line to list out all the station name:";
+				cout << "\nEnter a station line to list out all the station name:\n";
 				cin >> l;
 				string lineinput;
 				for (int i = 0; i < l.length(); i++)
 				{
 					lineinput += toupper(l[i]);;
 				}
-				if (!stations.DisplayAllStations(lineinput))
-					cout << "Station cannot be found!";
+				stations.DisplayAllStations(lineinput);
 				string target;
 				cout << "Enter a station name to display its information:";
 				getline(cin, target);
