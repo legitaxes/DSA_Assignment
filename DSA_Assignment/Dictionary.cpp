@@ -41,9 +41,9 @@ int DictionaryStation::hash(KeyType key)
 		else
 		{
 			value = charvalue(key[i]);
-			total = (total * 52) + value;
+			total = (total * 52) + (value*99) ;
 			/*total = value * pow(52, key.length() - (i + 1)) + total;*/
-			total = total % MAX_SIZE;
+			total = abs(total % MAX_SIZE);
 		}
 	}
 	if (number != "")
