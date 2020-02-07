@@ -34,7 +34,7 @@ int DictionaryStation::hash(KeyType key)
 	for (int i = 0; i < key.length(); i++)
 	{
 		//if this is a digit, then store the numbers as a string to be converted into a int later
-		if (isdigit(key[i]) == true)
+		if (isdigit(key[i]))
 		{
 			number += key[i];
 		}
@@ -42,7 +42,7 @@ int DictionaryStation::hash(KeyType key)
 		{
 			value = charvalue(key[i]);
 			total = (total * 52) + value;
-			total = value * pow(52, key.length() - (i + 1)) + total;
+			/*total = value * pow(52, key.length() - (i + 1)) + total;*/
 			total = total % MAX_SIZE;
 		}
 	}
