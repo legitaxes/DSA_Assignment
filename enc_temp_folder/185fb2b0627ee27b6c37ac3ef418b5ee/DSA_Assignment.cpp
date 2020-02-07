@@ -116,7 +116,7 @@ int main()
 			{
 				bool interchange = true;
 				bool code = line.Linebool(linecode);
-				if (code == true) 
+				if (code == true)
 				{
 					stations.AddNewStation(station_code, linecode, station_name, interchange);
 					break;
