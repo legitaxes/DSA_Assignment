@@ -46,7 +46,7 @@ public:
 	// Displays all the station based on given line
 	// pre : checks the station code and determine the line
 	// post: print out all station name based on the line
-	void DisplayAllStations(string linecode);
+	bool DisplayAllStations(string linecode);
 
 	// Displays all the station information (Station Name, Station Code, whether it is an interchange) based on given station name
 	// pre : check station name validity, whether it exists

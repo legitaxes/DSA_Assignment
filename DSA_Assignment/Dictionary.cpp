@@ -107,8 +107,6 @@ void DictionaryCode::DisplayAllLines()
 		Node *tempNode = items[i];
 		if (tempNode != NULL)
 		{
-
-			cout << "Index = " << i << endl;
 			cout << "Line: " << tempNode->key << endl;
 			cout << "-------------------------" << endl;
 		}
@@ -195,7 +193,7 @@ bool DictionaryStation::AddNewStation(KeyType hashedkey,ItemType stationName, bo
 	}
 }
 
-void DictionaryStation::DisplayAllStations(string line)
+bool DictionaryStation::DisplayAllStations(string line)
 {
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
@@ -217,8 +215,10 @@ void DictionaryStation::DisplayAllStations(string line)
 				}
 				cout << "-------------------------" << endl;
 			}
+			return true;
 		}
 	}
+	return false;
 }
 
 void DictionaryStation::DisplayStationInfo(string name)

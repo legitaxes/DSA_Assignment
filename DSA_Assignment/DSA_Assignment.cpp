@@ -43,28 +43,6 @@ int main()
 	//}
 	//ip.close();
 	//-----------------------------------------------------------------------
-	//read the station interchange data and save the data somewhere [not done: save it somewhere, should be stored as array]
-	ifstream lp("Interchanges.csv");
-	if (!lp.is_open())
-	{
-		cout << "Error: File Open" << "\n";
-	}
-	ItemType station_code1;
-	ItemType station_code2;
-	array<string, 10>interchangeArray;
-	//string(*interchangeArray_ptr)[35][2] = &interchangeArray;
-	int i = 0;
-	while (lp.good())
-	{
-		getline(lp, station_code1, ',');
-		getline(lp, station_code2, '\n');
-		interchangeArray[i] = station_code1;
-		interchangeArray[i + 1] = station_code2;
-		cout << station_code1 << " " << station_code2 << endl;
-		i = i + 2;
-	}
-	lp.close();
-
 
 	//-----------------------------------------------------------------------
 	//read the station information data and save the data somewhere [not done: save the station somewhere]
@@ -181,7 +159,8 @@ int main()
 				{
 					lineinput += toupper(l[i]);;
 				}
-				stations.DisplayAllStations(lineinput);
+				if (!stations.DisplayAllStations(lineinput))
+					cout << "Station cannot be found!";
 				string target;
 				cout << "Enter a station name to display its information:";
 				getline(cin, target);
