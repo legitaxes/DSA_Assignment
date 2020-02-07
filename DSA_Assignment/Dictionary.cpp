@@ -122,11 +122,6 @@ void DictionaryCode::DisplayAllLines()
 	}
 }
 
-void DictionaryCode::DisplayStationInfo(string name)
-{
-}
-
-
 bool DictionaryCode::FindRoute(string source, string destination)
 {
 	return false;
@@ -242,5 +237,9 @@ void DictionaryStation::DisplayAllStations(string line)
 	}
 }
 
+void DictionaryStation::DisplayStationInfo(string name)
+{
+
+}
 /*================================END OF DICTIONARYSTATION PART================================*/
 
