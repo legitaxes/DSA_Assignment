@@ -97,7 +97,7 @@ int main()
 	{
 
 		if (!getline(xp, input, '\n'))
-		{
+		{ 
 			station_route = input;
 			cout << station_route << "\n";
 		}

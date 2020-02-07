@@ -22,9 +22,8 @@ int charvalue(char c)
 	}
 	else
 	{
-
+		return -1;
 	}
-	return -1;
 }
 
 int DictionaryStation::hash(KeyType key)
