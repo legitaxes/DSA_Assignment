@@ -67,12 +67,13 @@ int main()
 	string station_code1;
 	string station_code2;
 	string interchangeArray[35][2];
+	//p = interchangeArray;
 	int i = 0;
 	while (lp.good())
 	{
 		getline(lp, station_code1, ',');
-		getline(lp, station_code2, '\n');
 		interchangeArray[i][i] = station_code1;
+		getline(lp, station_code2, '\n');
 		interchangeArray[i][i+1] = station_code2;
 		i++;
 	}
@@ -124,10 +125,14 @@ int main()
 		getline(op, station_name, '\n');
 		for (int i = 0; i < sizeof(interchangeArray); i++)
 		{
-			if (interchangeArray[i][i] == station_code || interchangeArray[i][i + 1] == station_code)
+			if (interchangeArray[i][i+1] == station_code)
 			{
 				interchange = true;
 			}
+			/*else if(interchangeArray[i][i + 1] == station_code)
+			{
+				interchange = true;
+			}*/
 		}
 		stations.AddNewStation(station_code, linecode, station_name, interchange);
 		a++; //increment the a value 

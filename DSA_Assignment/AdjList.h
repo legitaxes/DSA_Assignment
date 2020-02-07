@@ -13,7 +13,7 @@ struct graphEdge {
 	int start_ver, end_ver, weight;
 };
 class DiaGraph {
-	// insert new nodes into adjacency list from given graph
+	// insert new nodes into adjacency ist from given graph
 	adjNode* getAdjListNode(int value, int weight, adjNode* head) {
 		adjNode* newNode = new adjNode;
 		newNode->val = value;
