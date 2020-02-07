@@ -4,6 +4,7 @@
 using namespace std;
 
 const int MAX_SIZE = 1325;
+const int MAX_SIZE2 = 7000;
 typedef string KeyType; //station code is the keytype
 typedef string ItemType; 
 
@@ -22,7 +23,7 @@ private:
 
 	int size;
 
-	Node *items[MAX_SIZE];
+	Node *items[MAX_SIZE2];
 public:
 
 	// constructor
@@ -45,6 +46,12 @@ public:
 	// pre : checks the station code and determine the line
 	// post: print out all station name based on the line
 	void DisplayAllStations(string linecode);
+
+	// Displays all the station information (Station Name, Station Code, whether it is an interchange) based on given station name
+	// pre : check station name validity, whether it exists
+	// post: station information is printed out 
+	void DisplayStationInfo(string name);
+
 };
 
 class DictionaryCode //dictionarycode is the 1st dictionary which stores the line code which points to the second dictionary
@@ -83,11 +90,6 @@ public: //where all the methods are stored
 	// pre : none
 	// post: print out all lines
 	void DisplayAllLines();
-
-c	// Displays all the station information (Station Name, Station Code, whether it is an interchange) based on given station name
-	// pre : check station name validity, whether it exists
-	// post: station information is printed out 
-	void DisplayStationInfo(string name);
 
 	// print out the route and price of the route based on the given source and destination
 	// pre : checks whether the station name exists for both source and destination

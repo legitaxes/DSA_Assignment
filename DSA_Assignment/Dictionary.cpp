@@ -31,20 +31,28 @@ int DictionaryStation::hash(KeyType key)
 {
 	int total = 0;
 	int value = 0;
-	int number = 0;
+	string number = "";
 	for (int i = 0; i < key.length(); i++)
 	{
+		//if this is a digit, then store the numbers as a string to be converted into a int later
 		if (isdigit(key[i]) == true)
 		{
 			number += key[i];
 		}
-		value = charvalue(key[i]);
-		value = value + number;
-		total = (total * 52) + value;
-		//total = value*pow(52, key.length() - (i+1)) + total;
-		total = total % MAX_SIZE;
+		else
+		{
+			value = charvalue(key[i]);
+			total = (total * 52) + value;
+			total = value * pow(52, key.length() - (i + 1)) + total;
+			total = total % MAX_SIZE;
+		}
 	}
-	//cout << total;
+	if (number != "")
+	{
+		// this converts string to integer
+		int num = stoi(number);
+		total = num + total;
+	}
 	return total;
 }
 
@@ -194,36 +202,16 @@ bool DictionaryStation::AddNewStation(KeyType hashedkey,  string linecode,ItemTy
 			NewNode->stationname = stationName;
 			NewNode->linecode = linecode;
 			NewNode->interchange = interchange;
-			NewNode->next = NULL;
 			items[index] = NewNode;
+			size++;
+			return true;
 		}
-		else
+		else //checks if the station added is using the same existing station code
 		{
-			Node *currentNode = items[index];
-			if (currentNode->key == hashedkey)
-			{
-				return false;
-			}
-			while (currentNode->next != NULL)
-			{
-				currentNode = currentNode->next;
-				if (currentNode->key == hashedkey)
-				{
-					return false;
-				}
-			}
-			// Create a new Node
-			Node *NewNode = new Node;
-			NewNode->key = hashedkey;
-			NewNode->stationname = stationName;
-			NewNode->linecode = linecode;
-			NewNode->interchange = interchange;
-			NewNode->next = NULL;
-			currentNode = items[index];
+			return false;
 		}
 	}
-	size++;
-	return true;
+	return false;
 }
 
 void DictionaryStation::DisplayAllStations(string line)
