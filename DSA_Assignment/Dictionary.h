@@ -56,16 +56,12 @@ public:
 class DictionaryCode //dictionarycode is the 1st dictionary which stores the line code which points to the second dictionary
 {
 private:
-
-	
 	struct Node
 	{
 		KeyType key; //search key = this is station line
-		ItemType linename; // line name is the station line e.g. EW
 	};
 	Node *items[MAX_SIZE];
 	DictionaryStation dict;
-	ItemType stationcode;
 	//DictionaryCode *stationcode[MAX_SIZE];
 	int size;
 
