@@ -18,20 +18,20 @@ int main()
 	DictionaryCode line;
 	string l;
 	DictionaryStation stations;
-	line.Addlines("EW");
-	line.Addlines("NS");
-	//line.DisplayAllLines();
-	stations.AddNewStation("EW1", "EW" ,"Pasir Ris", false);
-	stations.AddNewStation("EW2", "EW", "Tampines", true);
-	stations.AddNewStation("EW3", "EW", "asdas", true);
-	stations.AddNewStation("EW12", "EW", "edwin", true);
-	stations.AddNewStation("EW21", "EW", "Ben", true);
-	stations.AddNewStation("CG", "CG", "kl", true);
-	stations.AddNewStation("CG1", "CG", "jacky", true);
-	stations.AddNewStation("CG2", "CG", "ryan", true);
-	//stations.AddNewStation("NS1", "NS" ,"CCK", true);
-	stations.DisplayAllStations("CG");
-	stations.DisplayAllStations("EW");
+	//line.Addlines("EW");
+	//line.Addlines("NS");
+	////line.DisplayAllLines();
+	//stations.AddNewStation("EW1", "EW" ,"Pasir Ris", false);
+	//stations.AddNewStation("EW2", "EW", "Tampines", true);
+	//stations.AddNewStation("EW3", "EW", "asdas", true);
+	//stations.AddNewStation("EW12", "EW", "edwin", true);
+	//stations.AddNewStation("EW21", "EW", "Ben", true);
+	//stations.AddNewStation("CG", "CG", "kl", true);
+	//stations.AddNewStation("CG1", "CG", "jacky", true);
+	//stations.AddNewStation("CG2", "CG", "ryan", true);
+	////stations.AddNewStation("NS1", "NS" ,"CCK", true);
+	//stations.DisplayAllStations("CG");
+	//stations.DisplayAllStations("EW");
 
 	////==================Read all the files first===============================
 	////reads the fare file and saving the data into an array
@@ -104,13 +104,13 @@ int main()
 				{
 					if (stationcodeArray[i] == linecode)
 					{
-						return;
+						break;
 					}
 					else
 					{
 						line.Addlines(linecode);
 						stationcodeArray[a] = linecode;
-						return;
+						break;
 					}
 				}
 
@@ -119,7 +119,6 @@ int main()
 		getline(op, station_name, '\n');
 		stations.AddNewStation(station_code, linecode, station_name, false);
 		a++; //increment the a value 
-		cout << "Station Code: " << station_code << " Station Name: " << station_name << "\n";
 	}
 	op.close();
 	//-----------------------------------------------------------------------

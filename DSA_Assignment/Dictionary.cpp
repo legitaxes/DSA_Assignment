@@ -95,7 +95,6 @@ bool DictionaryCode::Addlines(KeyType newkey)
 	}
 	else
 	{
-		cout << "There is already a line that exist!" << endl;
 		return false;
 	}
 	return false;
