@@ -18,7 +18,6 @@ private:
 		string linecode; // this is the line code e.g. EW
 		ItemType stationname;
 		bool interchange; // this is station name
-		Node *next;
 	};
 
 	int size;
@@ -63,7 +62,6 @@ private:
 	{
 		KeyType key; //search key = this is station line
 		ItemType linename; // line name is the station line e.g. EW
-		Node *next;
 	};
 	Node *items[MAX_SIZE];
 	DictionaryStation dict;
@@ -84,7 +82,7 @@ public: //where all the methods are stored
 	// Add lines to the given line
 	// Pre: none
 	// Post: Added lines to the list of lines
-	bool Addlines(KeyType newkey, ItemType newitem);
+	bool Addlines(KeyType newkey);
 
 	// Displays all the lines 
 	// pre : none

@@ -18,10 +18,10 @@ int main()
 	DictionaryCode line;
 	string l;
 	DictionaryStation stations;
-	line.Addlines("EW", "EW");
-	line.Addlines("NS", "NS");
+	line.Addlines("EW");
+	line.Addlines("NS");
 	//line.DisplayAllLines();
-	stations.AddNewStation("EW1", "EW" ,"Pasir Ris", false );
+	stations.AddNewStation("EW1", "EW" ,"Pasir Ris", false);
 	stations.AddNewStation("EW2", "EW", "Tampines", true);
 	stations.AddNewStation("EW3", "EW", "asdas", true);
 	stations.AddNewStation("EW12", "EW", "edwin", true);
@@ -57,23 +57,23 @@ int main()
 	//}
 	//ip.close();
 
-	////-----------------------------------------------------------------------
-	////read the station information data and save the data somewhere [not done: save the station somewhere]
-	//ifstream op("Stations.csv");
-	//if (!op.is_open())
-	//{
-	//	cout << "Error: File Open" << "\n";
-	//}
-	//string station_code;
-	//string station_name;
-	//while (op.good())
-	//{
-	//	getline(op, station_code, ',');
-	//	getline(op, station_name, '\n');
-	//	cout << "Station Code: " << station_code << " Station Name: " << station_name << "\n";
-	//}
-	//op.close();
-	////-----------------------------------------------------------------------
+	//-----------------------------------------------------------------------
+	//read the station information data and save the data somewhere [not done: save the station somewhere]
+	ifstream op("Stations.csv");
+	if (!op.is_open())
+	{
+		cout << "Error: File Open" << "\n";
+	}
+	string station_code;
+	string station_name;
+	while (op.good())
+	{
+		getline(op, station_code, ',');
+		getline(op, station_name, '\n');
+		cout << "Station Code: " << station_code << " Station Name: " << station_name << "\n";
+	}
+	op.close();
+	//-----------------------------------------------------------------------
 
 	////read the station interchange data and save the data somewhere [not done: save it somewhere, should be stored as array]
 	//ifstream lp("Interchanges.csv");

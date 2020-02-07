@@ -81,42 +81,25 @@ DictionaryCode::DictionaryCode()
 
 DictionaryCode::~DictionaryCode() {}
 
-bool DictionaryCode::Addlines(KeyType newkey, ItemType newitem)
+bool DictionaryCode::Addlines(KeyType newkey)
 {
 	int index = hash(newkey);
 	if (items[index] == NULL)
 	{
 		// Create a new Node
 		Node *NewNode = new Node;
-		NewNode->linename = newitem;
+		NewNode->linename = newkey;
 		NewNode->key = newkey;
-		NewNode->next = NULL;
 		items[index] = NewNode;
+		size++;
+		return true;
 	}
 	else
 	{
-		Node *currentNode = items[index];
-		if (currentNode->key == newkey)
-		{
-			return false;
-		}
-		while (currentNode->next != NULL)
-		{
-			currentNode = currentNode->next;
-			if (currentNode->key == newkey)
-			{
-				return false;
-			}
-		}
-		// Create a new Node
-		Node *NewNode = new Node;
-		NewNode->linename = newitem;
-		NewNode->key = newkey;
-		NewNode->next = NULL;
-		currentNode = items[index];
+		cout << "There is already a line that exist!" << endl;
+		return false;
 	}
-	size++;
-	return true;
+	return false;
 }
 
 void DictionaryCode::DisplayAllLines()
