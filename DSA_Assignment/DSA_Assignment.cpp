@@ -56,26 +56,8 @@ int main()
 	//	//cout << "The fare distance is " << distance << "KM based on the price " << fares << "cents" << "\n";
 	//}
 	//ip.close();
-
 	//-----------------------------------------------------------------------
-	//read the station information data and save the data somewhere [not done: save the station somewhere]
-	ifstream op("Stations.csv");
-	if (!op.is_open())
-	{
-		cout << "Error: File Open" << "\n";
-	}
-	string station_code;
-	string station_name;
-	while (op.good())
-	{
-		getline(op, station_code, ',');
-		getline(op, station_name, '\n');
-		cout << "Station Code: " << station_code << " Station Name: " << station_name << "\n";
-	}
-	op.close();
-	//-----------------------------------------------------------------------
-
-	////read the station interchange data and save the data somewhere [not done: save it somewhere, should be stored as array]
+	//read the station interchange data and save the data somewhere [not done: save it somewhere, should be stored as array]
 	//ifstream lp("Interchanges.csv");
 	//if (!lp.is_open())
 	//{
@@ -90,7 +72,58 @@ int main()
 	//	cout << "Station Code: " << station_code1 << " " << station_code2 << "\n";
 	//}
 	//lp.close();
-	////-----------------------------------------------------------------------
+
+
+	//-----------------------------------------------------------------------
+	//read the station information data and save the data somewhere [not done: save the station somewhere]
+	ifstream op("Stations.csv");
+	if (!op.is_open())
+	{
+		cout << "Error: File Open" << "\n";
+	}
+	string station_code;
+	string station_name;
+	string stationcodeArray[20]; //use this array to check whether it is a duplicate line
+	int a = 0;
+	while (op.good())
+	{
+		getline(op, station_code, ',');
+		string linecode;
+		//splits the station code from eg. "EW2" to "EW" and add to stationcodeArray which is used to check the station
+		for (int i = 0; i < station_code.length(); i++)
+		{
+			if (!isdigit(station_code[i]))
+			{
+				linecode += station_code[i];
+			}
+			//after reaching the last character of the stationcode 
+			if (i == station_code.length()-1)
+			{
+				//check through the list of stationcodeArray
+				for (int i = 0; i < sizeof(stationcodeArray); i++)
+				{
+					if (stationcodeArray[i] == linecode)
+					{
+						return;
+					}
+					else
+					{
+						line.Addlines(linecode);
+						stationcodeArray[a] = linecode;
+						return;
+					}
+				}
+
+			}
+		}
+		getline(op, station_name, '\n');
+		stations.AddNewStation(station_code, linecode, station_name, false);
+		a++; //increment the a value 
+		cout << "Station Code: " << station_code << " Station Name: " << station_name << "\n";
+	}
+	op.close();
+	//-----------------------------------------------------------------------
+
 
 	////read the station interchange data and save the data somewhere [not done: save it somewhere, how to read the file using while loop]
 	//ifstream xp("Routes.csv");
@@ -219,4 +252,3 @@ void displayMenu()
 	cout << "--------------------------------\n";
 	cout << "Enter option : ";
 }
-
