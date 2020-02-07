@@ -3,7 +3,7 @@
 #include<iostream>
 using namespace std;
 
-const int MAX_SIZE = 101;
+const int MAX_SIZE = 1325;
 typedef string KeyType; //station code is the keytype
 typedef string ItemType; 
 
@@ -84,7 +84,7 @@ public: //where all the methods are stored
 	// post: print out all lines
 	void DisplayAllLines();
 
-	// Displays all the station information (Station Name, Station Code, whether it is an interchange) based on given station name
+c	// Displays all the station information (Station Name, Station Code, whether it is an interchange) based on given station name
 	// pre : check station name validity, whether it exists
 	// post: station information is printed out 
 	void DisplayStationInfo(string name);

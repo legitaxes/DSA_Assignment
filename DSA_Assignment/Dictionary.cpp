@@ -11,17 +11,13 @@ using namespace std;
 
 int charvalue(char c)
 {
-	if (isalnum(c))
+	if (isalpha(c))
 	{
 		if (isupper(c))
 			return (int)c - (int) 'A';
-		else if (islower(c))
-		{
-			return (int)c - (int) 'a' + 26;
-		}
 		else
 		{
-			return (int)c - (int) 'a' + 26 + c;
+			return (int)c - (int) 'a' + 26;
 		}
 	}
 	else
