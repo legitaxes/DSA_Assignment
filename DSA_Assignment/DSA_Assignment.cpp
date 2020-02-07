@@ -5,9 +5,12 @@
 #include "Dictionary.h"
 #include "pch.h"
 #include <string>
+#include <vector>
+#include <sstream>
 #include <iostream>
 #include <fstream>
 #include <array>
+
 
 using namespace std;
 
@@ -19,29 +22,29 @@ int main()
 	string l;
 	DictionaryStation stations;
 	string target;
-	////==================Read all the files first===============================
-	////reads the fare file and saving the data into an array
-	//ifstream ip("Fares.csv");
-	//if (!ip.is_open())
-	//	cout << "Error: File Open" << "\n";
-	//string fare;
-	//string fare_distance;
-	//float fareArray[20][2];
-	//int i = 0;
-	////initialise an array and store the fare and fare_distance
-	//while (ip.good())
-	//{
-	//	getline(ip, fare_distance, ',');
-	//	getline(ip, fare, '\n');
-	//	float distance = stof(fare_distance);
-	//	float fares = stof(fare);
-	//	fareArray[i][i] = distance;
-	//	fareArray[i][i + 1] = fares;
-	//	cout << fareArray[i][i] << " " << fareArray[i][i + 1] << "\n";
-	//	i++;
-	//	//cout << "The fare distance is " << distance << "KM based on the price " << fares << "cents" << "\n";
-	//}
-	//ip.close();
+	//==================Read all the files first===============================
+	//reads the fare file and saving the data into an array
+	ifstream ip("Fares.csv");
+	if (!ip.is_open())
+		cout << "Error: File Open" << "\n";
+	string fare;
+	string fare_distance;
+	float fareArray[20][2];
+	int i = 0;
+	//initialise an array and store the fare and fare_distance
+	while (ip.good())
+	{
+		getline(ip, fare_distance, ',');
+		getline(ip, fare, '\n');
+		float distance = stof(fare_distance);
+		float fares = stof(fare);
+		fareArray[i][i] = distance;
+		fareArray[i][i + 1] = fares;
+		//cout << fareArray[i][i] << " " << fareArray[i][i + 1] << "\n";
+		i++;
+		//cout << "The fare distance is " << distance << "KM based on the price " << fares << "cents" << "\n";
+	}
+	ip.close();
 	//-----------------------------------------------------------------------
 
 	//-----------------------------------------------------------------------
@@ -67,8 +70,6 @@ int main()
 			{
 				linecode += station_code[i];
 			}
-			//after reaching the last character of the stationcode 
-				//check through the list of stationcodeArray
 		}
 		line.Addlines(linecode);
 		getline(op, station_name, '\n');
@@ -106,27 +107,51 @@ int main()
 	//-----------------------------------------------------------------------
 
 
-	////read the station interchange data and save the data somewhere [not done: save it somewhere, how to read the file using while loop]
-	//ifstream xp("Routes.csv");
-	//if (!xp.is_open())
-	//{
-	//	cout << "Error: File Open" << "\n";
-	//}
-	//string input;
-	//string station_route;
-	//string distance;
-	//while (getline(xp, input, ','))
-	//{
+	//read the station interchange data and save the data somewhere [not done: save it somewhere, how to read the file using while loop]
+	ifstream xp("Routes.csv");
+	if (!xp.is_open())
+	{
+		cout << "Error: File Open" << "\n";
+	}
+	string input;
+	string station_route;
+	string distance;
+	vector<int> stationroutelist;
+	vector<int> distancelist;
+	while (xp.good())
+	{
+		//first iteration will read the first line and the second line of the file
+		//gets current line's station routes and store it in one string
+		getline(xp, station_route);
+		stringstream ss(station_route);
+		while(ss.good()) 
+		{
+			string substation;
+			getline(ss, substation, ',');
+			//changes the whole of station code to numbers to store it inside a vector which will be used for vertexes
+			stationroutelist.push_back(stations.hash(substation));
+		}
 
-	//	if (!getline(xp, input, '\n'))
-	//	{
-	//		station_route = input;
-	//		cout << station_route << "\n";
-	//	}
-	//	cout << "Station Code: " << station_code << "\n";
-	//}
-	//xp.close();
-	////-----------------------------------------------------------------------
+		//gets the distance for the station routes above
+		getline(xp, distance);
+		stringstream dd(distance);
+		for (int i; dd >> i;) {
+			distancelist.push_back(i);
+			if (dd.peek() == ',')
+				dd.ignore();
+		}
+	}
+	for (int i = 0; i < stationroutelist.size(); i++)
+	{
+		cout << stationroutelist[i] << endl;
+	}
+
+	for (int i = 0; i < distancelist.size(); i++)
+	{
+		cout << distancelist[i] << endl;
+	}
+	xp.close();
+	//-----------------------------------------------------------------------
 
 	////==================Display menu functions===============================
 	int option = -1;
@@ -135,7 +160,7 @@ int main()
 		displayMenu();
 		cin >> option;
 
-		if (option == 1)	// display all mrt station based on the given mrt line
+		if (option == 1)	// display all mrt station based on the given mrt line by user input
 		{
 			line.DisplayAllLines();
 			cout << "\nEnter a station line to list out all the station name: ";
@@ -149,11 +174,12 @@ int main()
 		}
 		else
 		{
-			if (option == 2)	// display station information based on the station name given
+			if (option == 2)	// display station information based on the station name given by user input
 			{
 				cout << "Enter a station name to display its information:";
+				cin.ignore();
 				getline(cin, target);
-				cout << target;
+				
 				stations.DisplayStationInfo(target);
 			}
 			else
@@ -211,16 +237,19 @@ int main()
 void displayMenu()
 {
 	cout << endl;
-	cout << "MRT Station \n";
-	cout << "--------------------------------\n";
+	cout << "==============================================================================================" << endl;
+	cout << "=====================================MRT STATION==============================================" << endl;
+	cout << "==============================================================================================" << endl;
+
 	cout << "[1] Display all the stations in a given line\n";
 	cout << "[2] Display station information for a given name \n";
 	cout << "[3] Add and Save a new station on a given MRT line \n";
 	cout << "[4] Find and display a route and price based on source and destination stations\n";
+	cout << "==============================================================================================" << endl;
 	cout << "[5] Add a new line [ADV] \n";
 	cout << "[6] Search for Shortest Route and its Price [ADV] \n";
 	cout << "[7] Display 3 possible routes with price and distance [ADV] \n";
 	cout << "[0] Exit \n";
-	cout << "--------------------------------\n";
+	cout << "==============================================================================================" << endl;
 	cout << "Enter option : ";
 }
