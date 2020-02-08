@@ -171,7 +171,13 @@ int main()
 	for (auto& value : adjacencyList)
 	{
 		string vertex = value.first;
-
+		list< pair<string, int> > adjacentVertices = value.second;
+		list< pair<string, int> >::iterator itr = adjacentVertices.begin();
+		cout << "adjacencyList[" << vertex << "]";
+		while (itr != adjacentVertices.end()) {
+			cout << " -> " << (*itr).first << " (" << (*itr).second << ")";
+			++itr;
+		}
 	}
 	//for (int i = 0; i < stationroutelist.size(); i++)
 	//{
