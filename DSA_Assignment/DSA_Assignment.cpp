@@ -18,17 +18,24 @@ void displayMenu();
 
 int main()
 {
+	//initialize the program with the 2 dictionary...
 	DictionaryCode line;
-	string l;
 	DictionaryStation stations;
-	string target;
+
+	//create the necessary variables for the program...
+	ItemType l;
+	ItemType target;
+	int vertices, edges, weight;
+	string v1, v2;
+
+
 	//==================Read all the files first===============================
 	//reads the fare file and saving the data into an array
 	ifstream ip("Fares.csv");
 	if (!ip.is_open())
 		cout << "Error: File Open" << "\n";
-	string fare;
-	string fare_distance;
+	ItemType fare;
+	ItemType fare_distance;
 	float fareArray[20][2];
 	int i = 0;
 	//initialise an array and store the fare and fare_distance
@@ -54,15 +61,15 @@ int main()
 	{
 		cout << "Error: File Open" << "\n";
 	}
-	string station_code;
-	string station_name;
+	ItemType station_code;
+	ItemType station_name;
 	int a = 0;
-	unordered_map<string, vector<string>> stationsmap;
+	unordered_map<ItemType, vector<ItemType>> stationsmap;
 	while (op.good())
 	{
 		getline(op, station_code, ',');
 
-		string linecode;
+		ItemType linecode;
 		//splits the station code from eg. "EW2" to "EW" and add to stationcodeArray which is used to check the station
 		for (int i = 0; i < station_code.length(); i++)
 		{
@@ -81,12 +88,13 @@ int main()
 		}
 		else
 		{
-			vector<string> station_codeli;
+			vector<ItemType> station_codeli;
 			station_codeli.push_back(station_code);
 			stationsmap.insert({ station_name, station_codeli });
 		}
 	}
 	op.close();
+	//add the station to the dictionary
 	for (auto it : stationsmap)
 	{
 		for (int i = 0; i < it.second.size(); i++)
@@ -113,10 +121,10 @@ int main()
 	{
 		cout << "Error: File Open" << "\n";
 	}
-	string input;
-	string station_route;
-	string distance;
-	vector<int> stationroutelist;
+	ItemType input;
+	ItemType station_route;
+	ItemType distance;
+	vector<string> stationroutelist;
 	vector<int> distancelist;
 	while (xp.good())
 	{
@@ -126,10 +134,13 @@ int main()
 		stringstream ss(station_route);
 		while(ss.good()) 
 		{
-			string substation;
+			ItemType substation;
 			getline(ss, substation, ',');
+			while (ss.good())
+			{
+				stationroutelist.push_back(substation);
+			}
 			//changes the whole of station code to numbers to store it inside a vector which will be used for vertexes
-			stationroutelist.push_back(stations.hash(substation));
 		}
 
 		//gets the distance for the station routes above
@@ -141,15 +152,42 @@ int main()
 				dd.ignore();
 		}
 	}
-	for (int i = 0; i < stationroutelist.size(); i++)
+	//initialize the number of vertices and edges by counting the size of the list
+	vertices = stationroutelist.size();
+	edges = distancelist.size();
+	//create an unordered map to map all of the above information to the vertices
+	// Adjacency List is a map of <string, list>.
+	// Where each element in the list is pair<string, int>
+	// pair.first -> the edge's destination (string)
+	// pair.second -> edge's weight
+	unordered_map< string, list< pair<string, int> > > adjacencyList(vertices + 1);
+	for (int i = 1; i <= edges; ++i)
 	{
-		cout << stationroutelist[i] << endl;
+		for (int i = 0; i < vertices; i++)
+		{
+			adjacencyList[stationroutelist[i]].push_back(make_pair(stationroutelist[i+1], distancelist[i]));
+		}
 	}
+	for (auto& value : adjacencyList)
+	{
+		string vertex = value.first;
+		list< pair<string, int> > adjacentVertices = value.second;
+		list< pair<string, int> >::iterator itr = adjacentVertices.begin();
+		cout << "adjacencyList[" << vertex << "]";
+		while (itr != adjacentVertices.end()) {
+			cout << " -> " << (*itr).first << " (" << (*itr).second << ")";
+			++itr;
+		}
+	}
+	//for (int i = 0; i < stationroutelist.size(); i++)
+	//{
+	//	cout << stationroutelist[i] << endl;
+	//}
 
-	for (int i = 0; i < distancelist.size(); i++)
-	{
-		cout << distancelist[i] << endl;
-	}
+	//for (int i = 0; i < distancelist.size(); i++)
+	//{
+	//	cout << distancelist[i] << endl;
+	//}
 	xp.close();
 	//-----------------------------------------------------------------------
 
@@ -165,7 +203,7 @@ int main()
 			line.DisplayAllLines();
 			cout << "\nEnter a station line to list out all the station name: ";
 			cin >> l;
-			string lineinput;
+			ItemType lineinput;
 			for (int i = 0; i < l.length(); i++)
 			{
 				lineinput += toupper(l[i]);;
@@ -277,7 +315,7 @@ void displayMenu()
 	cout << "==============================================================================================" << endl;
 	cout << "[5] Add a new line [ADV] \n";
 	cout << "[6] Search for Shortest Route and its Price [ADV] \n";
-	cout << "[7] Display 3 possible routes with price and distance [ADV] \n";
+	//cout << "[7] Display 3 possible routes with price and distance [ADV] \n";
 	cout << "[0] Exit \n";
 	cout << "==============================================================================================" << endl;
 	cout << "Enter option : ";

@@ -21,9 +21,6 @@
     <ClInclude Include="Dictionary.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="AdjList.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="PriorityQueue.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -36,9 +33,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Dictionary.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AdjList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DijkstrasAlgo.cpp">
