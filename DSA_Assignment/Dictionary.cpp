@@ -30,7 +30,7 @@ int DictionaryStation::hash(KeyType key)
 {
 	int total = 0;
 	int value = 0;
-	string number = "";
+	ItemType number = "";
 	for (int i = 0; i < key.length(); i++)
 	{
 		//if this is a digit, then store the numbers as a string to be converted into a int later
@@ -113,25 +113,25 @@ void DictionaryCode::DisplayAllLines()
 	}
 }
 
-bool DictionaryCode::FindRoute(string source, string destination)
+bool DictionaryCode::FindRoute(ItemType source, ItemType destination)
 {
 	return false;
 }
 
 
-bool DictionaryCode::AddNewLine(string stationcode, string stationname, string stationname1)
+bool DictionaryCode::AddNewLine(ItemType stationcode, ItemType stationname, ItemType stationname1)
 {
 	return false;
 }
 
 //displays all the possible routes that a user can go given the source and destination
-bool DictionaryCode::DisplayPossibleRoutes(string source, string destination)
+bool DictionaryCode::DisplayPossibleRoutes(ItemType source, ItemType destination)
 {
 	return false;
 }
 
 //this function checks whether the line exists 
-bool DictionaryCode::Linebool(string line)
+bool DictionaryCode::Linebool(ItemType line)
 {
 	for (int i = 0; i < size; i++)
 	{
@@ -144,6 +144,7 @@ bool DictionaryCode::Linebool(string line)
 			return false;
 		}
 	}
+	return false;
 }
 
 /*================================END OF DICTIONARYCODE PART================================*/
@@ -166,7 +167,7 @@ DictionaryStation::~DictionaryStation()
 bool DictionaryStation::AddNewStation(KeyType hashedkey,ItemType stationName, bool interchange)
 {
 	// stationcode = hashed key
-	string linecode;
+	ItemType linecode;
 	for (int i = 0; i < hashedkey.length(); i++)
 	{
 		if (!isdigit(hashedkey[i]))
@@ -193,7 +194,7 @@ bool DictionaryStation::AddNewStation(KeyType hashedkey,ItemType stationName, bo
 	}
 }
 
-void DictionaryStation::DisplayAllStations(string line)
+void DictionaryStation::DisplayAllStations(ItemType line)
 {
 	cout << "\n===============================LISTING ALL THE STATIONS FROM - " << line << "=====================================\n" << endl;
 	for (int i = 0; i < MAX_SIZE; i++)
@@ -218,7 +219,7 @@ void DictionaryStation::DisplayAllStations(string line)
 	}
 }
 
-void DictionaryStation::DisplayStationInfo(string name)
+void DictionaryStation::DisplayStationInfo(ItemType name)
 {
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
