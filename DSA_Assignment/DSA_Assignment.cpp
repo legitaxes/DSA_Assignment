@@ -18,7 +18,7 @@ int main()
 	DictionaryCode line;
 	string l;
 	DictionaryStation stations;
-	string target;
+	
 	////==================Read all the files first===============================
 	////reads the fare file and saving the data into an array
 	//ifstream ip("Fares.csv");
@@ -147,64 +147,55 @@ int main()
 			}
 			stations.DisplayAllStations(lineinput);
 		}
-		else
+		else if (option == 2)	// display station information based on the station name given
 		{
-			if (option == 2)	// display station information based on the station name given
-			{
-				cout << "Enter a station name to display its information:";
-				getline(cin, target);
-				cout << target;
-				stations.DisplayStationInfo(target);
-			}
-			else
-				if (option == 3)	// add item
-				{
-					//int n;
-					//cout << "Enter a number to add : ";
-					//cin >> n;
-					//bst.insert(n);
-				}
-				else
-					if (option == 4)	// delete item
-					{
-						//int n;
-						//cout << "Enter a number to delete : ";
-						//cin >> n;
-						//bst.remove(n);
-					}
-					else
-						if (option == 5)
-						{
-							//	int n = bst.countNodes();
-							//	cout << "The number of nodes there are is " << n;
-						}
-			// display number of items
-
-						else
-							if (option == 6)	// display height
-							{
-								//	int n = bst.getHeight();
-								//	cout << "The height of the nodes is " << n;
-							}
-							else
-								if (option == 7)	// check if tree is balanced
-								{
-									//		bool b = bst.isBalanced();
-									//		if (b == true)
-									//		{
-									//			cout << "The tree is balanced!";
-									//		}
-									//		else
-									//		{
-									//			cout << "The tree is not balanced! :(";
-									//		}
-								}
-								else
-									if (option == 0)
-										cout << "Bye! \n";
-									else
-										cout << "Sorry. You have entered an invalid option. \n";
+			string target;
+			cout << "Enter a station name to display its information:";
+			cin.ignore();
+			getline(cin, target);
+			stations.DisplayStationInfo(target);
 		}
+		else if (option == 3)	// add item
+		{
+			//int n;
+			//cout << "Enter a number to add : ";
+			//cin >> n;
+			//bst.insert(n);
+		}
+		else if (option == 4)	// delete item
+		{
+			//int n;
+			//cout << "Enter a number to delete : ";
+			//cin >> n;
+			//bst.remove(n);
+		}
+		else if (option == 5)
+		{
+			//	int n = bst.countNodes();
+			//	cout << "The number of nodes there are is " << n;
+		}
+		// display number of items
+		else if (option == 6)	// display height
+		{
+			//	int n = bst.getHeight();
+			//	cout << "The height of the nodes is " << n;
+		}
+		else if (option == 7)	// check if tree is balanced
+		{
+			//		bool b = bst.isBalanced();
+			//		if (b == true)
+			//		{
+			//			cout << "The tree is balanced!";
+			//		}
+			//		else
+			//		{
+			//			cout << "The tree is not balanced! :(";
+			//		}
+		}
+		else if (option == 0)
+			cout << "Bye! \n";
+		else
+			cout << "Sorry. You have entered an invalid option. \n";
 	}
 }
 
