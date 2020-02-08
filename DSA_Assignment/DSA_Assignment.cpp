@@ -183,12 +183,41 @@ int main()
 				stations.DisplayStationInfo(target);
 			}
 			else
-				if (option == 3)	// add item
+				if (option == 3)	// Add and save a new station on a given line;
 				{
-					//int n;
-					//cout << "Enter a number to add : ";
-					//cin >> n;
-					//bst.insert(n);
+					string lineinput; // user input of the MRT line to be added
+					string stationcode;
+					string stationname;
+					char interchange;
+					line.DisplayAllLines();
+					cout << "\nChoose a station line to add a new station to: ";
+					cin >> l;
+					for (int i = 0; i < l.length(); i++)
+					{
+						lineinput += toupper(l[i]);;
+					}
+					stations.DisplayAllStations(lineinput);
+					cout << "\nStation Code: ";
+					cin >> l;
+					for (int i = 0; i < l.length(); i++)
+					{
+						stationcode += toupper(l[i]);;
+					}
+					cout << "\nStation Name: ";
+					cin.ignore();
+					getline(cin, stationname);
+					cout << "\nInterchange?(Y/N): ";
+					cin >> interchange;
+					toupper(interchange);
+					if (interchange == 'Y')
+					{
+						stations.AddNewStation(stationcode, stationname, true);
+					}
+					else
+					{
+						stations.AddNewStation(stationcode, stationname, false);
+					}
+					cout << "The new station has been added to the line.";
 				}
 				else
 					if (option == 4)	// delete item
