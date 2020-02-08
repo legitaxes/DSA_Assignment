@@ -235,7 +235,6 @@ void DictionaryStation::DisplayStationInfo(string name)
 				cout << "Station Code: " << tempNode->key << " || " << "Station Name: " << tempNode->stationname << " || " << "Interchange: " << "No" << endl;
 			}
 			cout << "============================================================================" << endl;
-
 		}
 	}
 }
